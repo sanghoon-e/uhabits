@@ -23,6 +23,15 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("org.jlleitschuh.gradle.ktlint")
+    jacoco
+}
+
+subprojects {
+    apply(plugin = "jacoco")
+
+    jacoco {
+        toolVersion = "0.8.5" 
+    }
 }
 
 tasks.compileLint {
