@@ -30,7 +30,7 @@ subprojects {
     apply(plugin = "jacoco")
 
     jacoco {
-        toolVersion = "0.8.5" 
+        toolVersion = "0.8.11" 
     }
 }
 
