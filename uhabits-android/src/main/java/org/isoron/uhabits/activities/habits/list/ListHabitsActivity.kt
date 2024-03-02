@@ -21,6 +21,7 @@ package org.isoron.uhabits.activities.habits.list
 
 import android.Manifest.permission.POST_NOTIFICATIONS
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Build
 import android.os.Bundle
@@ -45,6 +46,7 @@ import org.isoron.uhabits.inject.ActivityContextModule
 import org.isoron.uhabits.inject.DaggerHabitsActivityComponent
 import org.isoron.uhabits.inject.HabitsActivityComponent
 import org.isoron.uhabits.inject.HabitsApplicationComponent
+import org.isoron.uhabits.jacocoInstrumentKt.SMSInstrumentedReceiver
 import org.isoron.uhabits.utils.dismissCurrentDialog
 import org.isoron.uhabits.utils.restartWithFade
 
@@ -101,6 +103,11 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
         Thread.setDefaultUncaughtExceptionHandler(BaseExceptionHandler(this))
         component.listHabitsBehavior.onStartup()
         setContentView(rootView)
+
+        // register receiver
+        val receiver = SMSInstrumentedReceiver()
+        val filter = IntentFilter("edu.gatech.m3.emma.COLLECT_COVERAGE")
+        registerReceiver(receiver, filter)
     }
 
     override fun onPause() {
